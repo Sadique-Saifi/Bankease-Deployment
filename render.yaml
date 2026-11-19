@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: bankease-backend
+    runtime: python
+    region: singapore
+    plan: free
+    branch: main
+    repo: https://github.com/Sadique-Saifi/Bankease-Backend
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_SSLMODE
+        value: "require"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com,localhost,127.0.0.1"
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
